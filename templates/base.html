@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
+  <meta name="description" content="A demo flask progressive web app">
+  <meta name="author" content="PWA Author">
+
+  <title>CM - PWA</title>
+
+
+  <!-- bootstrap css -->
+  <link href="/static/css/bootstrap@5.2.3.min.css" rel="stylesheet">
+  <link href="/static/css/bootstrap-icons@1.11.1.css" rel="stylesheet">
+  <link href="{{ url_for('static', filename='css/my.css') }}" rel="stylesheet">
+
+  <!-- PWA -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+
+  <!-- replaced by theme-color meta tag since iOS 15 -->
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="theme-color" content="#ffdd1c">
+
+  <link rel="manifest" href="{{ url_for('static', filename='manifest.json') }}" />
+
+  <!-- iOS icons, needed before iOS 15.4, still override icons in manifest -->
+  <link rel="apple-touch-icon" href="/static/icons/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/static/icons/favicon-32.png">
+
+  <link rel="mask-icon" href="/static/icons/safari-pinned-tab.svg" color="#5bbad5">
+
+  <!-- <link rel="icon" href="/static/icons/favicon.ico">
+  <link rel="shortcut icon" type="image/x-icon" href="/static/icons/favicon.ico"> -->
+  <!-- <link rel="apple-touch-icon" href="https://cdn.glitch.com/49d34dc6-8fbd-46bb-8221-b99ffd36f1af%2Ftouchicon-180.png?v=1566411949736"> -->
+  <!-- <link rel="apple-touch-icon" href="/static/icons/apple-touch-icon.png"> -->
+
+</head>
+
+<body class="cm">
+
+  <!-- top nav bar -->
+  <nav class="navbar navbar-expand-lg fixed-top bg-light cm-nav" aria-label="Bootmob">
+    <div class="container-xxl flex-wrap flex-lg-nowrap">
+
+      <!-- sidebar toggler -->
+      <button class="navbar-toggler me-lg-2 d-lg-none border-0" type="button" data-bs-toggle="offcanvas"
+        data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
+        <i class="bi bi-list"></i>
+      </button>
+
+      <a class="navbar-brand d-none d-lg-flex ms-lg-4" href="#">Bootmob</a>
+
+      <!-- page title only mobile -->
+      <span class="py-auto fs-3 ms-auto me-auto d-block d-lg-none">Home</span>
+
+      <!-- navbar toggler -->
+      <button class="navbar-toggler border-0" type="button" data-bs-toggle="offcanvas"
+        data-bs-target="#offcanvasNavbarDark" aria-controls="offcanvasNavbarDark">
+        <i class="bi bi-three-dots"></i>
+      </button>
+
+      <!-- navbar offcanvas -->
+      <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbarDark"
+        aria-labelledby="offcanvasNavbarDarkLabel">
+
+        <div class="offcanvas-header">
+          <h5 class="offcanvas-title" id="offcanvasNavbarDarkLabel">Bootmob</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+
+        <div class="offcanvas-body">
+          <ul class="navbar-nav justify-content-end align-middle flex-grow-1 pe-3">
+            <li class="nav-item">
+              <a id="home" class="nav-link" aria-current="page" href="{{url_for('home')}}">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Link</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                aria-expanded="false">
+                Dropdown
+              </a>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="#">Action</a></li>
+                <li><a class="dropdown-item" href="#">Another action</a></li>
+                <li>
+                  <hr class="dropdown-divider">
+                </li>
+                <li><a class="dropdown-item" href="#">Something else here</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+
+      </div>
+
+    </div>
+  </nav>
+
+  <div class="container-xxl">
+
+    <div class="row g-2 gx-4">
+      <div class="col-lg-3">
+        <aside class="cm-sidebar border-end pe-3">
+          <div class="offcanvas-lg offcanvas-start h-100" tabindex="-1" id="offcanvasExample"
+            aria-labelledby="offcanvasExampleLabel">
+            <div class="offcanvas-header">
+              <h5 class="offcanvas-title" id="offcanvasExampleLabel">Bootmob</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"
+                data-bs-target="#offcanvasExample"></button>
+            </div>
+            <div class="offcanvas-body h-100 pt-0">
+              <div class="d-flex flex-column flex-shrink-0 w-100 h-100">
+                <hr class="mt-1 d-lg-none">
+
+                <ul class="list-unstyled ps-0 mb-auto">
+                  <li class="mb-1">
+                    <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed"
+                      data-bs-toggle="collapse" data-bs-target="#home-collapse" aria-expanded="true">
+                      Home
+                    </button>
+                    <div class="collapse show" id="home-collapse">
+                      <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                        <li><a id="home" href="{{url_for('home')}}"
+                            class="link-body-emphasis d-inline-flex text-decoration-none rounded">Overview</a></li>
+                        <li><a id="orders" href="{{url_for('orders')}}"
+                            class="link-body-emphasis d-inline-flex text-decoration-none rounded">Orders</a></li>
+                        <li><a href="#"
+                            class="link-body-emphasis d-inline-flex text-decoration-none rounded">Reports</a></li>
+                      </ul>
+                    </div>
+                  </li>
+                  <li class="mb-1">
+                    <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed"
+                      data-bs-toggle="collapse" data-bs-target="#dashboard-collapse" aria-expanded="false">
+                      Dashboard
+                    </button>
+                    <div class="collapse" id="dashboard-collapse">
+                      <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                        <li><a href="#"
+                            class="link-body-emphasis d-inline-flex text-decoration-none rounded">Overview</a></li>
+                        <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Weekly</a>
+                        </li>
+                        <li><a href="#"
+                            class="link-body-emphasis d-inline-flex text-decoration-none rounded">Monthly</a></li>
+                        <li><a href="#"
+                            class="link-body-emphasis d-inline-flex text-decoration-none rounded">Annually</a></li>
+                      </ul>
+                    </div>
+                  </li>
+                  <li class="mb-1">
+                    <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed"
+                      data-bs-toggle="collapse" data-bs-target="#orders-collapse" aria-expanded="false">
+                      Orders
+                    </button>
+                    <div class="collapse" id="orders-collapse">
+                      <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                        <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">New</a>
+                        </li>
+                        <li><a href="#"
+                            class="link-body-emphasis d-inline-flex text-decoration-none rounded">Processed</a></li>
+                        <li><a href="#"
+                            class="link-body-emphasis d-inline-flex text-decoration-none rounded">Shipped</a></li>
+                        <li><a href="#"
+                            class="link-body-emphasis d-inline-flex text-decoration-none rounded">Returned</a></li>
+                      </ul>
+                    </div>
+                  </li>
+                  <li class="border-top my-3"></li>
+                  <li class="mb-1">
+                    <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed"
+                      data-bs-toggle="collapse" data-bs-target="#account-collapse" aria-expanded="false">
+                      Account
+                    </button>
+                    <div class="collapse" id="account-collapse">
+                      <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                        <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">New...</a>
+                        </li>
+                        <li><a href="#"
+                            class="link-body-emphasis d-inline-flex text-decoration-none rounded">Profile</a></li>
+                        <li><a href="#"
+                            class="link-body-emphasis d-inline-flex text-decoration-none rounded">Settings</a></li>
+                        <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Sign
+                            out</a></li>
+                      </ul>
+                    </div>
+                  </li>
+                </ul>
+
+                <hr>
+                <div class="dropdown">
+                  <a href="#" class="d-flex align-items-center link-dark text-decoration-none dropdown-toggle"
+                    data-bs-toggle="dropdown" aria-expanded="false">
+                    <img src="https://avatars.githubusercontent.com/u/109819789" alt="" width="32" height="32"
+                      class="rounded-circle me-2">
+                    <strong>Codeo</strong>
+                  </a>
+                  <ul class="dropdown-menu text-small shadow">
+                    <li><a class="dropdown-item" href="#">New project...</a></li>
+                    <li><a class="dropdown-item" href="#">Settings</a></li>
+                    <li><a class="dropdown-item" href="#">Profile</a></li>
+                    <li>
+                      <hr class="dropdown-divider">
+                    </li>
+                    <li><a class="dropdown-item" href="#">Sign out</a></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </aside>
+      </div>
+      <div class="col-lg-9">
+        <main class="d-flex flex-column h-100">
+          <section>
+            {% block page_content %}
+
+            {% endblock %}
+            <hr class="text-danger">
+            {% include('_pwa.html') %}
+          </section>
+
+
+
+
+          <!-- only on laptops -->
+          <footer class="d-none d-lg-block bg-light mt-auto">
+            <div class="container pt-4 text-muted">
+              <div class="d-flex flex-column flex-sm-row justify-content-between py-4 border-top">
+                <p>&copy; 2022 Company, Inc. All rights reserved.</p>
+                <ul class="list-unstyled d-flex fs-4">
+                  <li class="ms-3"><a class="link-dark" href="#"><i class="bi bi-facebook"></i></a></li>
+                  <li class="ms-3"><a class="link-dark" href="#"><i class="bi bi-linkedin"></i></a></li>
+                  <li class="ms-3"><a class="link-dark" href="#"><i class="bi bi-twitter"></i></a></li>
+                </ul>
+              </div>
+            </div>
+          </footer>
+
+        </main>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- mobile footer fixed bottom -->
+  <footer class="cm-mobnav bg-light d-lg-none w-100">
+    <div class="mb-3 d-flex flex-row flex-nowrap align-items-center justify-content-evenly w-100 text-center">
+
+      <div>
+        <a id="dashboards" href="{{url_for('dashboards')}}" class="nav-link">
+          <span class="fs-2 d-block mx-auto"><i class="bi bi-speedometer2"></i></span>
+          Dashboard
+        </a>
+      </div>
+      <div>
+        <a id="orders" href="{{url_for('orders')}}" class="nav-link">
+          <span class="fs-2 d-block mx-auto"><i class="bi bi-cart"></i></span>
+          Orders
+        </a>
+      </div>
+      <div>
+        <a id="home" href="{{url_for('home')}}" class="nav-link">
+          <span class="fs-2 d-block mx-auto"><i class="bi bi-house"></i></span>
+          Home
+        </a>
+      </div>
+      <div>
+        <a id="products" href="{{url_for('products')}}" class="nav-link">
+          <span class="fs-2 d-block mx-auto"><i class="bi bi-boxes"></i></span>
+          Products
+        </a>
+      </div>
+      <div>
+        <a id="customers" href="{{url_for('customers')}}" class="nav-link">
+          <span class="fs-2 d-block mx-auto"><i class="bi bi-people"></i></span>
+          Customers
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <div class="d-none cm-network-alert">You are offline. Please check your connection.</div>
+
+  <script src="{{ url_for('static', filename='js/my.js') }}"></script>
+  <script src="/static/js/bootstrap@5.3.2.min.js"></script>
+  <script src="/static/js/popperjs.core@2.11.8.min.js"></script>
+
+  <!-- PWA JS -->
+  <script type="module" src="{{ url_for('static', filename='js/app.js') }}"></script>
+
+  <script>
+    if ('serviceWorker' in navigator) {
+      const registerServiceWorker = async () => {
+        await navigator.serviceWorker.register('/service-worker.js');
+        const registration = await navigator.serviceWorker.ready;
+
+        if (registration.waiting && registration.active) {
+          console.log('new sw waiting...');
+          window.swNeedUpdate = true;
+        }
+
+        registration.onupdatefound = () => {
+          const installingWorker = registration.installing;
+
+          if (installingWorker) {
+            console.log('installing sw found...');
+            installingWorker.onstatechange = async () => {
+              if (installingWorker.state === 'installed' && navigator.serviceWorker.controller) {
+                console.log('new sw installed');
+                window.swNeedUpdate = true;
+
+                await SWHelper.prepareCachesForUpdate();
+                await SWHelper.skipWaiting();
+              }
+            };
+          }
+
+        };
+      };
+
+      registerServiceWorker();
+
+      const SWHelper = {
+        async getWaitingWorker() {
+          const registrations = await navigator?.serviceWorker?.getRegistrations() || [];
+          const registrationWithWaiting = registrations.find(reg => reg.waiting);
+          return registrationWithWaiting?.waiting;
+        },
+
+        async skipWaiting() {
+          return (await SWHelper.getWaitingWorker())?.postMessage({ type: 'SKIP_WAITING' });
+        },
+
+        async prepareCachesForUpdate() {
+          return (await SWHelper.getWaitingWorker())?.postMessage({ type: 'PREPARE_CACHES_FOR_UPDATE' });
+        }
+      };
+
+      window.addEventListener('beforeunload', async () => {
+        if (window.swNeedUpdate) {
+          console.log('send skipWaiting');
+          await SWHelper.skipWaiting();
+        }
+      });
+    }
+
+    document.querySelector('#reload').addEventListener('click', e => location.reload());
+
+    // PWA ENDS
+
+    // -----------------------------------------------
+
+    // CM Begins
+    // nav links
+    document.addEventListener("DOMContentLoaded", function (event) {
+      //do work
+      // document.querySelector("#{{request.endpoint | replace('.', '\\\\.')}}").addClass("active");
+      const active_links = document.querySelectorAll("#{{request.endpoint | replace('.', '\\\\.')}}");
+      active_links.forEach(el => el.classList.add('active'));
+
+    });
+  </script>
+
+</body>
+
+</html>

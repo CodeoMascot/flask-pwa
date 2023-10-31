@@ -1,0 +1,55 @@
+{
+    "name": "CM Progressive Web App",
+    "short_name": "CM PWA",
+    "id": "cm-pwa",
+    "start_url": "/?source=cm-pwa",
+    "background_color": "#93d3be",
+    "display": "standalone",
+    "display_override": [
+        "standalone",
+        "minimal-ui"
+    ],
+    "orientation": "portrait",
+    "dir": "ltr",
+    "scope": "/",
+    "theme_color": "#d21919",
+    "lang": "en-US",
+    "categories": [
+        "education",
+        "utilities"
+    ],
+    "description": "Base PWA app for Web App projects.",
+    "icons": [
+        {
+            "src": "/static/icons/manifest-icon-192.maskable.png",
+            "sizes": "192x192",
+            "type": "image/png",
+            "purpose": "any"
+        },
+        {
+            "src": "/static/icons/manifest-icon-192.maskable.png",
+            "sizes": "192x192",
+            "type": "image/png",
+            "purpose": "maskable"
+        },
+        {
+            "src": "/static/icons/manifest-icon-512.maskable.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "any"
+        },
+        {
+            "src": "/static/icons/manifest-icon-512.maskable.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "maskable"
+        }
+    ],
+    "handle_links": "auto",
+    "launch_handler": {
+        "client_mode": [
+            "navigate-existing",
+            "auto"
+        ]
+    }
+}
