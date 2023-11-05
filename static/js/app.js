@@ -1,11 +1,15 @@
 import {isIOS, isOffline} from './util-device.js';
 
+
+// installation handle
 const handleInstallPrompt = e => {
   e.preventDefault();
-
   window.deferredPrompt = e;
 };
+window.addEventListener('beforeinstallprompt', handleInstallPrompt);
 
+
+// Network status handling
 export const handleOffline = () => {
   document.querySelectorAll('.network-status').forEach(el => el.classList.add('offline'));
 };
@@ -14,7 +18,6 @@ export const handleOnline = () => {
   document.querySelectorAll('.network-status').forEach(el => el.classList.remove('offline'));
 };
 
-window.addEventListener('beforeinstallprompt', handleInstallPrompt);
 window.addEventListener('offline', handleOffline);
 window.addEventListener('online', handleOnline);
 
@@ -24,6 +27,7 @@ window.addEventListener('load', () => {
   }
 });
 
+
 // Badges red dot remove on focus
 document.addEventListener('visibilitychange', () => {
   console.log('visibilitychange', document.visibilityState);
@@ -32,6 +36,8 @@ document.addEventListener('visibilitychange', () => {
   }
 });
 
+
+// function to print message from service worker
 navigator.serviceWorker.addEventListener("message", (event) => {
   const {type} = event.data;
 
@@ -44,7 +50,7 @@ navigator.serviceWorker.addEventListener("message", (event) => {
 });
 
 
-
+// Get Devie pixels
 const ratio = window.devicePixelRatio || 1;
 const screen = {
   width: window.screen.width * ratio,

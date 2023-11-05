@@ -6,15 +6,19 @@
         </header>
     </div>
 
+    <p>Ver 1</p>
+
     <button id="reload" class="btn btn-outline-secondary my-1">Reload</button>
 
-    <div id="notifyContent" class="notification d-none">
-        <p>Notification Status: <span class="status"></span></p>
+    <div id="notifyContent">
+        <p><span class="status">No JS</span></p>
         <div class="buttons">
-            <button id="subscribe" class="btn btn-outline-secondary"></button>
-            <button id="unsubscribe" class="btn btn-outline-danger"></button>
+            <button id="subscribe" class="my-1 btn btn-outline-primary">Subscribe Notifications</button>
+            <button id="notify" class="my-1 btn btn-outline-success" disabled>Notify</button>
         </div>
-        <button id="send" class="btn btn-outline-success"></button>
+        <button id="pushApi" class="my-1 btn btn-outline-success">Get Push API</button>
+        <button id="unsubscribe" class="my-1 btn btn-outline-danger" onclick="return confirm('ok?')" disabled>Unsubscribe Push API</button>
+        <button id="send" class="my-1 btn btn-outline-secondary" onclick="return confirm('ok?')" disabled>Send Push</button>
     </div>
 
 </div>

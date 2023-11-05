@@ -2,10 +2,10 @@ const filesToCache = [
   '/offline',
   '/static/manifest.json',
 
-  '/static/icons/manifest-icon-192.maskable.png',
-  '/static/icons/manifest-icon-512.maskable.png',
-  '/static/icons/favicon-32.png',
-  '/static/icons/safari-pinned-tab.svg',
+  'https://codeomascot.github.io/pwa1/icons/manifest-icon-192.maskable.png',
+  'https://codeomascot.github.io/pwa1/icons/manifest-icon-512.maskable.png',
+  'https://codeomascot.github.io/pwa1/icons/favicon-32x32.png',
+  'https://codeomascot.github.io/pwa1/icons/safari-pinned-tab.svg',
   
   '/static/css/my.css',
   '/static/css/bootstrap@5.2.3.min.css',
@@ -14,6 +14,7 @@ const filesToCache = [
   
   '/static/js/my.js',
   '/static/js/app.js',
+  '/static/js/pwa-notifications.js',
   '/static/js/bootstrap@5.3.2.min.js',
   '/static/js/popperjs.core@2.11.8.min.js',
   '/static/js/util-device.js',
@@ -22,7 +23,7 @@ const filesToCache = [
 ];
 
 self.numBadges = 0;
-const version = 2;
+const version = 4;
 
 const cacheName = `cm-pwa-cache-${version}`;
 
@@ -33,10 +34,10 @@ const log = debug ? console.log.bind(console) : () => {
 };
 
 const IDBConfig = {
-  name: 'pwa-db',
+  name: 'cm-pwa-db',
   version,
   store: {
-    name: `pwa-store`,
+    name: `cm-pwa-store`,
     keyPath: 'timestamp'
   }
 };

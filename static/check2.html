@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>HTML 5 Boilerplate</title>
+</head>
+
+<body>
+  <div>Ver 2</div>
+  <button id="subscribe" class="my-1 btn btn-outline-secondary">Subscribe</button>
+  <div id="demo">test 1</div>
+  <button id="send" class="my-1 btn btn-outline-secondary">Send</button>
+
+  <script type="text/javascript">
+    const statusSpan = document.querySelector('#demo');
+    statusSpan.innerHTML = "<br>JS: Works";
+
+    const notificationSupported = 'Notification' in window;
+    statusSpan.innerHTML = (`${statusSpan.innerHTML}<br><br>Notify: ${notificationSupported}`);
+
+    /*
+    const cmGetRegistration = async () => {
+      const registration = await navigator.serviceWorker.getRegistration();
+      const pushSubscription = await registration.pushManager.getSubscription();
+      if (pushSubscription) {
+        statusSpan.innerHTML = (`${statusSpan.innerHTML}<br><br>Push: ${pushSubscription.endpoint}`);
+      }
+      else {
+        statusSpan.innerHTML = (`${statusSpan.innerHTML}<br><br>Push: Null`);
+      }
+    }
+    cmGetRegistration();
+*/
+const subscribeButton = document.querySelector('#subscribe');
+
+subscribeButton.addEventListener('click', async () => {
+  if (Notification.permission !== 'granted') {
+    Notification.requestPermission();
+  } else {
+    statusSpan.innerHTML = (`${statusSpan.innerHTML}<br><br>Notify Permission: Granted`);
+  }
+});
+
+const sendButton = document.querySelector('#send');
+
+sendButton.addEventListener('click', () => {
+    const options = {
+      body: 'Simple Chrome Desktop Notification',
+      dir: 'ltr',
+      image: 'https://cdn-icons-png.flaticon.com/512/2922/2922546.png'
+    };
+    const notification = new Notification('Notification', options);
+
+    notification.onclick = function () {
+      window.open('https://www.google.com');
+    };
+  });
+
+
+  </script>
+</body>
+
+</html>

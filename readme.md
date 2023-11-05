@@ -2,6 +2,12 @@
 
 _POC to see how PWA and flask work best togther_
 
+Handover
+
+- install
+- push to app store
+- load on scroll
+
 
 Today
 
@@ -15,14 +21,14 @@ Today
 - icons
   - [x] web ok
   - [x] adr ok
-  - [ ] ios no
+  - [x] ios ok - need https
 
 - splash
   - [x] web ok
   - [x] adr ok
   - [ ] ios no
 
-- [ ] notifications
+- [x] notifications
 - [ ] vibration not supported on both
 - [x] wake lock working on all
 
